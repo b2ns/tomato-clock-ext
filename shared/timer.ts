@@ -14,6 +14,7 @@ export type TimerState = {
   endAt: number | null
   preset: TimerDurations
   custom: TimerDurations
+  soundEnabled: boolean
 }
 
 export const DEFAULT_PRESET: TimerDurations = { work: 25, break: 5 }
@@ -38,6 +39,7 @@ export function createDefaultState(): TimerState {
     endAt: null,
     preset: { ...DEFAULT_PRESET },
     custom: { ...DEFAULT_PRESET },
+    soundEnabled: true,
   }
 }
 
@@ -55,6 +57,13 @@ export function withCustomDurations(
     ...state,
     custom,
     durationMs,
+  }
+}
+
+export function withSoundEnabled(state: TimerState, enabled: boolean): TimerState {
+  return {
+    ...state,
+    soundEnabled: enabled,
   }
 }
 

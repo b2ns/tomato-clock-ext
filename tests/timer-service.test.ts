@@ -23,6 +23,9 @@ function createAdapter(now = 1_000) {
     notify: async (title: string, message: string) => {
       calls.push(`notify:${title}:${message}`)
     },
+    playSound: async () => {
+      calls.push('playSound')
+    },
     now: () => now,
     get scheduledWhen() {
       return scheduledWhen
@@ -80,5 +83,34 @@ describe('timer service', () => {
     expect(overdueAdapter.calls.some((call) => call.startsWith('notify:'))).toBe(
       true,
     )
+  })
+
+  test('alarm completion plays sound when enabled', async () => {
+    const adapter = createAdapter()
+    const service = createTimerService(adapter)
+    await service.initialize()
+    await service.handleMessage({
+      type: 'START',
+      payload: { work: 25, break: 5 },
+    })
+    const overdueAdapter: Adapter = {
+      ...adapter,
+      now: () => Number.MAX_SAFE_INTEGER,
+    }
+    const overdueService = createTimerService(overdueAdapter)
+    await overdueService.initialize()
+    await overdueService.handleAlarm()
+    expect(overdueAdapter.calls).toContain('playSound')
+  })
+
+  test('SET_SOUND updates preference', async () => {
+    const adapter = createAdapter()
+    const service = createTimerService(adapter)
+    await service.initialize()
+    const updated = await service.handleMessage({
+      type: 'SET_SOUND',
+      payload: { enabled: false },
+    })
+    expect(updated.soundEnabled).toBe(false)
   })
 })

@@ -7,7 +7,7 @@ export default defineConfig({
   manifest: {
     name: 'pomodoro',
     description: 'a pomodoro timmer',
-    permissions: ['alarms', 'storage', 'notifications'],
+    permissions: ['alarms', 'storage', 'notifications', 'offscreen'],
   },
 
   //@ts-ignore

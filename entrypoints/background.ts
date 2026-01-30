@@ -4,7 +4,8 @@ import { createTimerService } from '@/shared/timer-service'
 import type { TimerMessage, TimerResponse } from '@/shared/messages'
 
 export default defineBackground(() => {
-  const service = createTimerService(createChromeAdapter())
+  const adapter = createChromeAdapter()
+  const service = createTimerService(adapter)
   void service.initialize()
 
   chrome.runtime.onInstalled.addListener(() => void service.initialize())
@@ -12,6 +13,11 @@ export default defineBackground(() => {
 
   chrome.runtime.onMessage.addListener(
     (message: TimerMessage, _sender, sendResponse) => {
+      if (message?.type === 'PLAY_SOUND') {
+        void adapter.playSound()
+        sendResponse?.(undefined)
+        return true
+      }
       service
         .handleMessage(message)
         .then((state) => sendResponse({ state } satisfies TimerResponse))
