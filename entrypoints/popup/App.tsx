@@ -1,12 +1,7 @@
+import type { TimerMessage, TimerResponse } from '@/shared/messages'
+import { clampMinutes, createDefaultState, formatDuration, type TimerState } from '@/shared/timer'
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
-import {
-  clampMinutes,
-  createDefaultState,
-  formatDuration,
-  type TimerState,
-} from '@/shared/timer'
-import type { TimerMessage, TimerResponse } from '@/shared/messages'
 
 type TimerAction = (message: TimerMessage) => void
 
@@ -67,11 +62,7 @@ function App() {
   }, [state, now])
 
   const statusLabel =
-    state.status === 'running'
-      ? 'Running'
-      : state.status === 'paused'
-        ? 'Paused'
-        : 'Ready'
+    state.status === 'running' ? 'Running' : state.status === 'paused' ? 'Paused' : 'Ready'
 
   const modeLabel = state.mode === 'work' ? 'Focus' : 'Break'
 
@@ -87,7 +78,7 @@ function App() {
   }
 
   return (
-    <main className="app">
+    <main className="app font-[50px]">
       <header className="app__header">
         <div className="app__badge">Tomato Clock</div>
         <div className="app__mode">{modeLabel}</div>
