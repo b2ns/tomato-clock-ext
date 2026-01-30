@@ -5,8 +5,12 @@ import { defineConfig } from 'wxt'
 export default defineConfig({
   modules: ['@wxt-dev/module-react', '@wxt-dev/auto-icons'],
   manifest: {
+    name: 'pomodoro',
+    description: 'a pomodoro timmer',
     permissions: ['alarms', 'storage', 'notifications'],
   },
+
+  //@ts-ignore
   vite: () => {
     return {
       plugins: [tailwindcss()],
