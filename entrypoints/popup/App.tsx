@@ -1,7 +1,6 @@
 import type { TimerMessage, TimerResponse } from '@/shared/messages'
 import { clampMinutes, createDefaultState, formatDuration, type TimerState } from '@/shared/timer'
 import { useEffect, useMemo, useState } from 'react'
-import './App.css'
 
 type TimerAction = (message: TimerMessage) => void
 
@@ -78,20 +77,31 @@ function App() {
   }
 
   return (
-    <main className="app font-[50px]">
-      <header className="app__header">
-        <div className="app__badge">Tomato Clock</div>
-        <div className="app__mode">{modeLabel}</div>
+    <main className="grid w-80 gap-4 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 shadow-[0_18px_40px_rgba(56,189,248,0.18)]">
+      <header className="flex items-center justify-between gap-3">
+        <div className="rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-cyan-200 shadow-[0_0_12px_rgba(34,211,238,0.35)]">
+          Tomato Clock
+        </div>
+        <div className="text-sm font-semibold text-indigo-200">{modeLabel}</div>
       </header>
 
-      <section className="app__timer">
-        <div className="timer__time">{formatDuration(remainingMs)}</div>
-        <div className="timer__status">{statusLabel}</div>
+      <section className="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+        <div className="tabular-nums text-4xl font-semibold text-slate-50">
+          {formatDuration(remainingMs)}
+        </div>
+        <div className="mt-1 text-[11px] uppercase tracking-[0.3em] text-cyan-300/80">
+          {statusLabel}
+        </div>
       </section>
 
-      <section className="app__controls">
-        <div className="control">
-          <label htmlFor="workMinutes">Work minutes</label>
+      <section className="grid gap-3">
+        <div className="grid gap-2">
+          <label
+            htmlFor="workMinutes"
+            className="text-[11px] uppercase tracking-[0.18em] text-slate-300/80"
+          >
+            Work minutes
+          </label>
           <input
             id="workMinutes"
             type="number"
@@ -99,10 +109,16 @@ function App() {
             max={180}
             value={workMinutes}
             onChange={(event) => setWorkMinutes(event.target.valueAsNumber)}
+            className="w-full rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
           />
         </div>
-        <div className="control">
-          <label htmlFor="breakMinutes">Break minutes</label>
+        <div className="grid gap-2">
+          <label
+            htmlFor="breakMinutes"
+            className="text-[11px] uppercase tracking-[0.18em] text-slate-300/80"
+          >
+            Break minutes
+          </label>
           <input
             id="breakMinutes"
             type="number"
@@ -110,34 +126,35 @@ function App() {
             max={180}
             value={breakMinutes}
             onChange={(event) => setBreakMinutes(event.target.valueAsNumber)}
+            className="w-full rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-cyan-400/60"
           />
         </div>
       </section>
 
-      <section className="app__actions">
+      <section className="grid grid-cols-2 gap-3">
         <button
-          className="btn btn--primary"
+          className="rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-3 py-2 font-semibold text-slate-950 shadow-[0_10px_20px_rgba(59,130,246,0.25)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(59,130,246,0.35)] disabled:cursor-not-allowed disabled:opacity-50"
           onClick={onStart}
           disabled={state.status === 'running'}
         >
           Start
         </button>
         <button
-          className="btn"
+          className="rounded-xl border border-white/10 bg-slate-800/80 px-3 py-2 font-semibold text-slate-100 transition hover:-translate-y-0.5 hover:shadow-[0_12px_22px_rgba(15,23,42,0.5)] disabled:cursor-not-allowed disabled:opacity-50"
           onClick={() => sendMessage({ type: 'PAUSE' })}
           disabled={state.status !== 'running'}
         >
           Pause
         </button>
         <button
-          className="btn"
+          className="rounded-xl border border-white/10 bg-slate-800/80 px-3 py-2 font-semibold text-slate-100 transition hover:-translate-y-0.5 hover:shadow-[0_12px_22px_rgba(15,23,42,0.5)] disabled:cursor-not-allowed disabled:opacity-50"
           onClick={() => sendMessage({ type: 'RESUME' })}
           disabled={state.status !== 'paused'}
         >
           Resume
         </button>
         <button
-          className="btn btn--ghost"
+          className="rounded-xl border border-cyan-400/30 bg-transparent px-3 py-2 font-semibold text-cyan-200 transition hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] disabled:cursor-not-allowed disabled:opacity-50"
           onClick={() => sendMessage({ type: 'RESET' })}
           disabled={state.status === 'idle'}
         >
