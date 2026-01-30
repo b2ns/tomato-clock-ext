@@ -193,6 +193,17 @@ button {
   border: 1px solid rgba(var(--accent-rgb), 0.25);
 }
 
+.neon-input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.neon-input[type='number']::-webkit-inner-spin-button,
+.neon-input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .neon-toggle {
   background: rgba(35, 9, 9, 0.9);
   box-shadow: inset 0 0 8px rgba(var(--accent-rgb), 0.2);
