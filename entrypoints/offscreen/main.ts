@@ -1,5 +1,7 @@
+import { browser } from '#imports'
+
 const playSpellSound = () => {
-  const AudioContextConstructor = window.AudioContext || window.webkitAudioContext
+  const AudioContextConstructor = window.AudioContext
   if (!AudioContextConstructor) return
 
   const context = new AudioContextConstructor()
@@ -28,7 +30,7 @@ const playSpellSound = () => {
   }, 1000)
 }
 
-chrome.runtime.onMessage.addListener((message) => {
+browser.runtime.onMessage.addListener((message) => {
   if (message && message.type === 'PLAY_SOUND') {
     playSpellSound()
   }

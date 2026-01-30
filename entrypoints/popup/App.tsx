@@ -1,3 +1,4 @@
+import { browser } from '#imports'
 import type { TimerMessage, TimerResponse } from '@/shared/messages'
 import { clampMinutes, createDefaultState, formatDuration, type TimerState } from '@/shared/timer'
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react'
@@ -5,12 +6,12 @@ import { useEffect, useMemo, useState, type ChangeEvent } from 'react'
 type TimerAction = (message: TimerMessage) => void
 
 const sendMessage: TimerAction = (message) => {
-  chrome.runtime.sendMessage(message, () => void 0)
+  browser.runtime.sendMessage(message, () => void 0)
 }
 
 const requestState = (): Promise<TimerState> =>
   new Promise((resolve) => {
-    chrome.runtime.sendMessage({ type: 'GET_STATE' }, (response: TimerResponse) =>
+    browser.runtime.sendMessage({ type: 'GET_STATE' }, (response: TimerResponse) =>
       resolve(response?.state ?? createDefaultState()),
     )
   })
@@ -33,8 +34,8 @@ function useTimerState() {
       if (area !== 'local' || !changes.timerState?.newValue) return
       setState(changes.timerState.newValue)
     }
-    chrome.storage.onChanged.addListener(handleChange)
-    return () => chrome.storage.onChanged.removeListener(handleChange)
+    browser.storage.onChanged.addListener(handleChange)
+    return () => browser.storage.onChanged.removeListener(handleChange)
   }, [])
 
   return { state, now }

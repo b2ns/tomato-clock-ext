@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.1.16",
-    "@types/chrome": "^0.0.268",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@wxt-dev/auto-icons": "^1.1.0",

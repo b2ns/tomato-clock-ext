@@ -1,9 +1,10 @@
-import type { TimerAdapter } from './timer-service'
+import { browser } from '#imports'
 import type { TimerState } from './timer'
+import type { TimerAdapter } from './timer-service'
 
 export const STORAGE_KEY = 'timerState'
 export const ALARM_NAME = 'pomodoro'
-const OFFSCREEN_URL = 'offscreen.html'
+const OFFSCREEN_URL = '/offscreen.html'
 
 type OffscreenApi = {
   hasDocument?: () => Promise<boolean>
@@ -14,8 +15,7 @@ type OffscreenApi = {
   }) => Promise<void>
 }
 
-const getOffscreen = () =>
-  (chrome as typeof chrome & { offscreen?: OffscreenApi }).offscreen
+const getOffscreen = () => (browser as typeof browser & { offscreen?: OffscreenApi }).offscreen
 
 let offscreenCreating: Promise<void> | null = null
 
@@ -29,7 +29,7 @@ const ensureOffscreenDocument = async () => {
   if (offscreenCreating) return offscreenCreating
   offscreenCreating = offscreen
     .createDocument({
-      url: chrome.runtime.getURL(OFFSCREEN_URL),
+      url: browser.runtime.getURL(OFFSCREEN_URL),
       reasons: ['AUDIO_PLAYBACK'],
       justification: 'Play timer completion sound',
     })
@@ -42,12 +42,12 @@ const ensureOffscreenDocument = async () => {
 
 const getStorage = (): Promise<Record<string, TimerState | undefined>> =>
   new Promise((resolve) => {
-    chrome.storage.local.get(STORAGE_KEY, (result) => resolve(result))
+    browser.storage.local.get(STORAGE_KEY, (result: any) => resolve(result))
   })
 
 const setStorage = (state: TimerState): Promise<void> =>
   new Promise((resolve) => {
-    chrome.storage.local.set({ [STORAGE_KEY]: state }, () => resolve())
+    browser.storage.local.set({ [STORAGE_KEY]: state }, () => resolve())
   })
 
 export function createChromeAdapter(): TimerAdapter {
@@ -62,19 +62,19 @@ export function createChromeAdapter(): TimerAdapter {
     },
     scheduleAlarm: (when) =>
       new Promise((resolve) => {
-        chrome.alarms.clear(ALARM_NAME, () => {
+        browser.alarms.clear(ALARM_NAME, () => {
           if (when) {
-            chrome.alarms.create(ALARM_NAME, { when })
+            browser.alarms.create(ALARM_NAME, { when })
           }
           resolve()
         })
       }),
     notify: (title, message) =>
       new Promise((resolve) => {
-        chrome.notifications.create(
+        browser.notifications.create(
           {
             type: 'basic',
-            iconUrl: 'icon/128.png',
+            iconUrl: 'icons/128.png',
             title,
             message,
           },
@@ -83,7 +83,7 @@ export function createChromeAdapter(): TimerAdapter {
       }),
     playSound: async () => {
       await ensureOffscreenDocument()
-      chrome.runtime.sendMessage({ type: 'PLAY_SOUND' }, () => void 0)
+      browser.runtime.sendMessage({ type: 'PLAY_SOUND' }, () => void 0)
     },
   }
 }
