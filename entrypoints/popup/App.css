@@ -1,42 +1,118 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.app {
+  width: 320px;
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+  background: linear-gradient(145deg, #fff7ef, #f7e1d2);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(86, 45, 24, 0.18);
+}
+
+.app__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.app__badge {
+  padding: 6px 10px;
+  background: #ffb28a;
+  border-radius: 999px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5b1f0f;
+}
+
+.app__mode {
+  font-weight: 600;
+  font-size: 14px;
+  color: #7b3321;
+}
+
+.app__timer {
   text-align: center;
+  padding: 18px 0;
+  background: #fff1e7;
+  border-radius: 16px;
+  border: 1px solid #f7c6ad;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #54bc4ae0);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.timer__time {
+  font-size: 40px;
+  font-weight: 600;
+  color: #5e2210;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.timer__status {
+  margin-top: 6px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b04c28;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.app__controls {
+  display: grid;
+  gap: 12px;
 }
 
-.card {
-  padding: 2em;
+.control {
+  display: grid;
+  gap: 6px;
 }
 
-.read-the-docs {
-  color: #888;
+.control label {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7b3321;
+}
+
+.control input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #e4b6a1;
+  background: #fff8f3;
+  font-size: 14px;
+  color: #5b1f0f;
+}
+
+.app__actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: #f1c1a5;
+  color: #5b1f0f;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(95, 32, 9, 0.18);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: #ff7a4b;
+  color: #fff7f2;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: #e4b6a1;
 }
