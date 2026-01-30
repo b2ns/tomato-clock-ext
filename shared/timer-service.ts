@@ -94,6 +94,12 @@ export function createTimerService(adapter: TimerAdapter) {
       return persist(state)
     },
 
+    async handleNotificationClick() {
+      await ensureInitialized()
+      if (state.status !== 'idle') return state
+      return persist(startTimer(state, adapter.now(), state.mode))
+    },
+
     getState() {
       return state
     },

@@ -4,6 +4,7 @@ import type { TimerAdapter } from './timer-service'
 
 export const STORAGE_KEY = 'timerState'
 export const ALARM_NAME = browser.runtime.getManifest().name
+export const NOTIFICATION_ID = `${ALARM_NAME}-complete`
 const OFFSCREEN_URL = '/offscreen.html'
 
 type OffscreenApi = {
@@ -72,6 +73,7 @@ export function createChromeAdapter(): TimerAdapter {
     notify: (title, message) =>
       new Promise((resolve) => {
         browser.notifications.create(
+          NOTIFICATION_ID,
           {
             type: 'basic',
             iconUrl: 'icons/128.png',

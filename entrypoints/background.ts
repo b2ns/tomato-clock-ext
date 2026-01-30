@@ -1,5 +1,5 @@
 import { browser, defineBackground } from '#imports'
-import { ALARM_NAME, createChromeAdapter } from '@/shared/chrome-adapter'
+import { ALARM_NAME, NOTIFICATION_ID, createChromeAdapter } from '@/shared/chrome-adapter'
 import type { TimerMessage, TimerResponse } from '@/shared/messages'
 import { createTimerService } from '@/shared/timer-service'
 
@@ -24,5 +24,10 @@ export default defineBackground(() => {
   browser.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name !== ALARM_NAME) return
     void service.handleAlarm()
+  })
+
+  browser.notifications.onClicked.addListener((notificationId) => {
+    if (notificationId !== NOTIFICATION_ID) return
+    void service.handleNotificationClick()
   })
 })
