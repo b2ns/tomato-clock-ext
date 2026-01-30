@@ -1,3 +1,7 @@
+ <IMPORTANT>
+test in this repo for tsx and ui part if forbidden
+ </IMPORTANT>
+
 # Repository Guidelines
 
 This repository is a WXT + React browser extension template. Use the guidance below when contributing.
@@ -16,7 +20,7 @@ here is the [doc](https://wxt.dev/knowledge/index.json)
 - `assets/` contains shared assets (e.g., `assets/react.svg`).
 - Root config: `wxt.config.ts`, `tsconfig.json`, `package.json`.
 
-## Build, Test, and Development Commands
+## Build, and Development Commands
 
 - `npm run dev` — start WXT dev server for Chromium-based browsers.
 - `npm run dev:firefox` — start dev server targeting Firefox.
@@ -35,12 +39,6 @@ here is the [doc](https://wxt.dev/knowledge/index.json)
 - React components in PascalCase (e.g., `App.tsx`).
 - Keep entrypoints grouped by surface (background/content/popup).
 - No linter is configured; follow existing conventions for structure and naming.
-
-## Testing Guidelines
-
-- No test framework is configured yet.
-- Use `npm run compile` as a minimum check before PRs.
-- If you add tests in the future, keep them near related modules (e.g., `entrypoints/popup/__tests__/`).
 
 ## Commit & Pull Request Guidelines
 
