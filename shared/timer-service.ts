@@ -74,7 +74,8 @@ export function createTimerService(adapter: TimerAdapter) {
           return persist(withSoundEnabled(state, message.payload.enabled))
         case 'START': {
           const updated = withCustomDurations(state, message.payload)
-          return persist(startTimer(updated, adapter.now(), message.mode ?? 'work'))
+          const mode = message.mode ?? updated.mode
+          return persist(startTimer(updated, adapter.now(), mode))
         }
         case 'PAUSE':
           return persist(pauseTimer(state, adapter.now()))

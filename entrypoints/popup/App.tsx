@@ -74,7 +74,6 @@ function App() {
           work: clampMinutes(state.custom.work),
           break: clampMinutes(state.custom.break),
         },
-        mode: 'work',
       })
       return
     }

@@ -6,8 +6,8 @@ export default defineConfig({
   imports: false,
   modules: ['@wxt-dev/module-react', '@wxt-dev/auto-icons'],
   manifest: {
-    name: 'pomodoro',
-    description: 'a pomodoro timmer',
+    name: 'Tomato',
+    description: 'a pomodoro clock',
     permissions: ['alarms', 'storage', 'notifications', 'offscreen'],
   },
 

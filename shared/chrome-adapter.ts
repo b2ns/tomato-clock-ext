@@ -3,7 +3,7 @@ import type { TimerState } from './timer'
 import type { TimerAdapter } from './timer-service'
 
 export const STORAGE_KEY = 'timerState'
-export const ALARM_NAME = 'pomodoro'
+export const ALARM_NAME = browser.runtime.getManifest().name
 const OFFSCREEN_URL = '/offscreen.html'
 
 type OffscreenApi = {
