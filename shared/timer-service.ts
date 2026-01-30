@@ -6,6 +6,7 @@ import {
   resumeTimer,
   startTimer,
   withSoundEnabled,
+  withNotificationsEnabled,
   withCustomDurations,
   type TimerState,
 } from './timer'
@@ -49,7 +50,9 @@ export function createTimerService(adapter: TimerAdapter) {
       const finishedMode = state.mode
       state = completeSegment(state)
       const { title, message } = buildNotification(finishedMode)
-      await adapter.notify(title, message)
+      if (state.notificationsEnabled) {
+        await adapter.notify(title, message)
+      }
       if (state.soundEnabled) {
         await adapter.playSound()
       }
@@ -72,6 +75,8 @@ export function createTimerService(adapter: TimerAdapter) {
           return persist(withCustomDurations(state, message.payload))
         case 'SET_SOUND':
           return persist(withSoundEnabled(state, message.payload.enabled))
+        case 'SET_NOTIFICATIONS':
+          return persist(withNotificationsEnabled(state, message.payload.enabled))
         case 'START': {
           const updated = withCustomDurations(state, message.payload)
           const mode = message.mode ?? updated.mode
