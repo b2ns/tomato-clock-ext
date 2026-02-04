@@ -8,6 +8,26 @@ export default defineBackground(() => {
   const service = createTimerService(adapter)
   void service.initialize()
 
+  const startWithMode = async (mode: 'work' | 'break') => {
+    const current = await service.handleMessage({ type: 'GET_STATE' })
+    await service.handleMessage({
+      type: 'START',
+      payload: { work: current.custom.work, break: current.custom.break },
+      mode,
+    })
+  }
+
+  const togglePause = async () => {
+    const current = await service.handleMessage({ type: 'GET_STATE' })
+    if (current.status === 'running') {
+      await service.handleMessage({ type: 'PAUSE' })
+      return
+    }
+    if (current.status === 'paused') {
+      await service.handleMessage({ type: 'RESUME' })
+    }
+  }
+
   browser.runtime.onInstalled.addListener(() => void service.initialize())
   browser.runtime.onStartup.addListener(() => void service.initialize())
 
@@ -20,6 +40,22 @@ export default defineBackground(() => {
     }
     service.handleMessage(message).then((state) => sendResponse({ state } satisfies TimerResponse))
     return true
+  })
+
+  browser.commands.onCommand.addListener((command) => {
+    void (async () => {
+      if (command === 'focus') {
+        await startWithMode('work')
+        return
+      }
+      if (command === 'rest') {
+        await startWithMode('break')
+        return
+      }
+      if (command === 'toggle-pause') {
+        await togglePause()
+      }
+    })()
   })
 
   browser.alarms.onAlarm.addListener((alarm) => {
