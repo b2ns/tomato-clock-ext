@@ -62,23 +62,32 @@ function App() {
     return state.durationMs
   }, [state, now])
 
-  const startStopLabel = state.status === 'idle' ? 'Start' : 'Stop'
   const pauseResumeLabel = state.status === 'paused' ? 'Resume' : 'Pause'
   const isRunning = state.status === 'running'
   const themeClass = state.mode === 'break' ? 'theme-break' : 'theme-work'
 
-  const handleStartStop = () => {
-    if (state.status === 'idle') {
-      sendMessage({
-        type: 'START',
-        payload: {
-          work: clampMinutes(state.custom.work),
-          break: clampMinutes(state.custom.break),
-        },
-      })
-      return
-    }
-    sendMessage({ type: 'RESET' })
+  const handleStartWorking = () => {
+    console.log('dsp handleStartWorking ')
+    sendMessage({
+      type: 'START',
+      payload: {
+        work: clampMinutes(state.custom.work),
+        break: clampMinutes(state.custom.break),
+      },
+      mode: 'work',
+    })
+  }
+
+  const handleStartBreak = () => {
+    console.log('dsp handleStartBreak')
+    sendMessage({
+      type: 'START',
+      payload: {
+        work: clampMinutes(state.custom.work),
+        break: clampMinutes(state.custom.break),
+      },
+      mode: 'break',
+    })
   }
 
   const handlePauseResume = () => {
@@ -163,11 +172,18 @@ function App() {
 
               <div className="mt-auto grid gap-3">
                 <button
-                  className="group neon-primary relative rounded-xl px-3 py-2 font-semibold text-[rgb(var(--panel-strong-rgb))] transition hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(var(--accent-rgb),0.35)]"
-                  onClick={handleStartStop}
+                  className="group neon-primary relative rounded-xl px-3 py-2 text-sm font-semibold text-[rgb(var(--panel-strong-rgb))] transition hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(var(--accent-rgb),0.35)]"
+                  onClick={handleStartWorking}
                 >
                   <span className="absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(var(--glint-rgb),0.65),transparent)] opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100" />
-                  <span className="relative z-10">{startStopLabel}</span>
+                  <span className="relative z-10">Start working</span>
+                </button>
+                <button
+                  className="group neon-secondary relative rounded-xl px-3 py-2 text-sm font-semibold text-(--text-soft-strong) transition hover:-translate-y-0.5 hover:shadow-[0_12px_22px_rgba(var(--accent-rgb),0.2)]"
+                  onClick={handleStartBreak}
+                >
+                  <span className="absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(var(--accent-rgb),0.35),transparent)] opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100" />
+                  <span className="relative z-10">Take a break</span>
                 </button>
                 <button
                   className="group neon-secondary relative rounded-xl px-3 py-2 font-semibold text-(--text-soft-strong) transition hover:-translate-y-0.5 hover:shadow-[0_12px_22px_rgba(var(--accent-rgb),0.2)] disabled:cursor-not-allowed disabled:opacity-50"

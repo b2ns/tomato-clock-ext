@@ -12,6 +12,7 @@ export default defineBackground(() => {
   browser.runtime.onStartup.addListener(() => void service.initialize())
 
   browser.runtime.onMessage.addListener((message: TimerMessage, _sender, sendResponse) => {
+    console.log('dsp messages', message)
     if (message?.type === 'PLAY_SOUND') {
       void adapter.playSound()
       sendResponse?.(undefined)

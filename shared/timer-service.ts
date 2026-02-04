@@ -1,3 +1,4 @@
+import type { TimerMessage } from './messages'
 import {
   completeSegment,
   createDefaultState,
@@ -5,12 +6,11 @@ import {
   resetTimer,
   resumeTimer,
   startTimer,
-  withSoundEnabled,
-  withNotificationsEnabled,
   withCustomDurations,
+  withNotificationsEnabled,
+  withSoundEnabled,
   type TimerState,
 } from './timer'
-import type { TimerMessage } from './messages'
 
 export type TimerAdapter = {
   getStoredState: () => Promise<TimerState | null>
@@ -27,9 +27,8 @@ export function createTimerService(adapter: TimerAdapter) {
   const persist = async (next: TimerState) => {
     state = next
     await adapter.setStoredState(state)
-    await adapter.scheduleAlarm(
-      state.status === 'running' && state.endAt ? state.endAt : null,
-    )
+    await adapter.scheduleAlarm(state.status === 'running' && state.endAt ? state.endAt : null)
+    console.log('dsp', { state })
     return state
   }
 
@@ -80,7 +79,10 @@ export function createTimerService(adapter: TimerAdapter) {
         case 'START': {
           const updated = withCustomDurations(state, message.payload)
           const mode = message.mode ?? updated.mode
-          return persist(startTimer(updated, adapter.now(), mode))
+          console.log('dsp', { message })
+          const next = startTimer(updated, adapter.now(), mode)
+          console.log('dsp', { next })
+          return persist(next)
         }
         case 'PAUSE':
           return persist(pauseTimer(state, adapter.now()))
