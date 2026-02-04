@@ -1,4 +1,5 @@
 import { browser } from '#imports'
+import { getBadgePresentation, type TimerPhase } from './timer-phase'
 import type { TimerState } from './timer'
 import type { TimerAdapter } from './timer-service'
 
@@ -86,6 +87,14 @@ export function createChromeAdapter(): TimerAdapter {
     playSound: async () => {
       await ensureOffscreenDocument()
       browser.runtime.sendMessage({ type: 'PLAY_SOUND' }, () => void 0)
+    },
+    setBadge: async (phase: TimerPhase) => {
+      const presentation = getBadgePresentation(phase)
+      await browser.action.setBadgeText({ text: presentation.text })
+      await browser.action.setBadgeBackgroundColor({ color: presentation.backgroundColor })
+      if (browser.action.setBadgeTextColor) {
+        await browser.action.setBadgeTextColor({ color: presentation.textColor })
+      }
     },
   }
 }
