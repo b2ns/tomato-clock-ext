@@ -1,6 +1,7 @@
 import { browser } from '#imports'
 import type { TimerMessage, TimerResponse } from '@/shared/messages'
 import { clampMinutes, createDefaultState, formatDuration, type TimerState } from '@/shared/timer'
+import { deriveTimerPhase, getPhaseLabel } from '@/shared/timer-phase'
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react'
 
 type TimerAction = (message: TimerMessage) => void
@@ -61,6 +62,9 @@ function App() {
     }
     return state.durationMs
   }, [state, now])
+
+  const phase = useMemo(() => deriveTimerPhase(state), [state])
+  const phaseLabel = getPhaseLabel(phase)
 
   const pauseResumeLabel = state.status === 'paused' ? 'Resume' : 'Pause'
   const isRunning = state.status === 'running'
@@ -164,6 +168,9 @@ function App() {
               className={`flex w-1/2 flex-col gap-4 ${settingsOpen ? 'pointer-events-none' : ''}`}
             >
               <div className="holo-card holo-corners relative rounded-2xl p-4 text-center">
+                <div className="text-[10px] tracking-[0.32em] text-(--text-muted) uppercase">
+                  {phaseLabel}
+                </div>
                 <div
                   className={`neon-text text-6xl leading-none font-semibold tracking-[0.08em] tabular-nums ${
                     isRunning ? 'animate-breathe' : ''
