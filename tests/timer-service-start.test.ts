@@ -20,6 +20,7 @@ test('start defaults to current mode when mode is omitted', async () => {
     scheduleAlarm: async () => {},
     notify: async () => {},
     playSound: async () => {},
+    setBadge: async () => {},
     now: () => 1_000,
   }
 
@@ -30,4 +31,33 @@ test('start defaults to current mode when mode is omitted', async () => {
   })
 
   assert.equal(next.mode, 'break')
+})
+
+test('persist updates badge with derived phase', async () => {
+  const baseState = createDefaultState()
+  let storedState: TimerState = {
+    ...baseState,
+    status: 'running' as const,
+    mode: 'work' as const,
+  }
+  let badgePhase: string | null = null
+
+  const adapter = {
+    getStoredState: async () => storedState,
+    setStoredState: async (next: TimerState) => {
+      storedState = next
+    },
+    scheduleAlarm: async () => {},
+    notify: async () => {},
+    playSound: async () => {},
+    setBadge: async (phase: string) => {
+      badgePhase = phase
+    },
+    now: () => 1_000,
+  }
+
+  const service = createTimerService(adapter)
+  await service.initialize()
+
+  assert.equal(badgePhase, 'focusing')
 })

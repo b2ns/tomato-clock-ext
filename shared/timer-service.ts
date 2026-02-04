@@ -11,6 +11,7 @@ import {
   withSoundEnabled,
   type TimerState,
 } from './timer'
+import { deriveTimerPhase } from './timer-phase'
 
 export type TimerAdapter = {
   getStoredState: () => Promise<TimerState | null>
@@ -18,6 +19,7 @@ export type TimerAdapter = {
   scheduleAlarm: (when: number | null) => Promise<void>
   notify: (title: string, message: string) => Promise<void>
   playSound: () => Promise<void>
+  setBadge: (phase: ReturnType<typeof deriveTimerPhase>) => Promise<void>
   now: () => number
 }
 
@@ -28,6 +30,7 @@ export function createTimerService(adapter: TimerAdapter) {
     state = next
     await adapter.setStoredState(state)
     await adapter.scheduleAlarm(state.status === 'running' && state.endAt ? state.endAt : null)
+    await adapter.setBadge(deriveTimerPhase(state))
     console.log('dsp', { state })
     return state
   }

@@ -31,6 +31,7 @@ test('does not send notification when notifications are disabled', async () => {
     playSound: async () => {
       soundCount += 1
     },
+    setBadge: async () => {},
     now: () => now,
   }
 
@@ -56,6 +57,7 @@ test('updates notification preference via SET_NOTIFICATIONS', async () => {
     scheduleAlarm: async () => {},
     notify: async () => {},
     playSound: async () => {},
+    setBadge: async () => {},
     now: () => 1_000,
   }
 
