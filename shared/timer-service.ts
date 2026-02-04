@@ -39,9 +39,9 @@ export function createTimerService(adapter: TimerAdapter) {
 
   const buildNotification = (mode: TimerState['mode']) => {
     if (mode === 'work') {
-      return { title: 'Work session complete', message: 'Time for a break.' }
+      return { title: 'Focus session complete', message: 'Time to rest.' }
     }
-    return { title: 'Break complete', message: 'Time to focus.' }
+    return { title: 'Rest complete', message: 'Return to focus when ready.' }
   }
 
   const completeIfOverdue = async (now: number) => {

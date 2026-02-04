@@ -1,6 +1,6 @@
 # Tomato Clock
 
-A cyberpunk-styled Pomodoro timer extension for focused work and deliberate breaks.
+A calm, restorative Pomodoro timer extension for deep focus and intentional rest.
 
 ## Install
 
@@ -10,24 +10,24 @@ A cyberpunk-styled Pomodoro timer extension for focused work and deliberate brea
 ## Quick Start
 
 1. Click the Tomato Clock icon in your browser toolbar.
-2. Set your **Work minutes** and **Break minutes**.
-3. Click **Start** to begin a focus session.
+2. Set your **Focus minutes** and **Rest minutes**.
+3. Click **Start focus** to begin a session.
 4. Use **Pause/Resume** or **Stop** as needed.
-5. Toggle **Spell sound** or **Notifications** in Settings.
+5. Toggle **Chime** or **Reminders** in Settings.
 
 ## Features
 
-- Pomodoro-style focus and break cycles.
-- Customizable work and break durations.
+- Pomodoro-style focus and rest cycles.
+- Customizable focus and rest durations.
 - Sound preview and optional alerts.
 - Desktop notifications (optional).
-- Neon cyberpunk UI built for quick glances.
+- Calm, restorative UI built for quick glances.
 
 ## Settings
 
-- **Work minutes / Break minutes:** Set your desired durations.
-- **Spell sound:** Toggle audio alerts; preview with the play button.
-- **Notifications:** Toggle system notifications.
+- **Focus minutes / Rest minutes:** Set your desired durations.
+- **Chime:** Toggle audio alerts; preview with the play button.
+- **Reminders:** Toggle system notifications.
 - **Save settings:** Applies your changes.
 
 ## FAQ
@@ -39,7 +39,7 @@ Yes. The timer continues in the background and updates the next time you open th
 Open Settings, adjust the minute inputs, then click **Save settings**.
 
 **How do I turn off sound or notifications?**  
-In Settings, toggle **Spell sound** or **Notifications** off.
+In Settings, toggle **Chime** or **Reminders** off.
 
 ## Privacy
 

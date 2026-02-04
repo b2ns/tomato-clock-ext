@@ -6,25 +6,25 @@
 }
 
 :root {
-  --accent-rgb: 255, 90, 42;
-  --accent-100: #ff7a3a;
-  --accent-200: #ff5a2a;
-  --accent-300: #f0371a;
-  --accent-400: #c91f14;
-  --glint-rgb: 255, 230, 210;
-  --base-950: #120405;
-  --base-900: #240607;
-  --base-800: #3b0a0a;
-  --panel-rgb: 42, 11, 11;
-  --panel-strong-rgb: 59, 15, 15;
-  --text-primary: #ffe2d6;
-  --text-muted: #ffbfa8;
-  --text-subtle: #ff9a78;
-  --text-subtle-muted: rgba(255, 154, 120, 0.8);
-  --text-soft: #ffd7c7;
-  --text-soft-strong: #ffd2c4;
-  --toggle-knob: #ffd9cd;
-  --toggle-knob-active: #fff1ea;
+  --accent-rgb: 246, 160, 120;
+  --accent-100: #ffd4bb;
+  --accent-200: #f6a078;
+  --accent-300: #e4835f;
+  --accent-400: #cc6a4a;
+  --glint-rgb: 255, 236, 225;
+  --base-950: #14110f;
+  --base-900: #1e1915;
+  --base-800: #2a231d;
+  --panel-rgb: 36, 30, 25;
+  --panel-strong-rgb: 45, 37, 30;
+  --text-primary: #f6ece6;
+  --text-muted: #e7cfc1;
+  --text-subtle: #d7b5a6;
+  --text-subtle-muted: rgba(215, 181, 166, 0.8);
+  --text-soft: #efe1d9;
+  --text-soft-strong: #e9d8cd;
+  --toggle-knob: #f3e5dd;
+  --toggle-knob-active: #fff5ee;
 }
 
 [data-theme='dark'],
@@ -32,42 +32,34 @@
 }
 
 .theme-break {
-  --accent-rgb: 46, 210, 201;
-  --accent-100: #6feae3;
-  --accent-200: #2ed2c9;
-  --accent-300: #1ab7ad;
-  --accent-400: #11948c;
-  --glint-rgb: 208, 255, 252;
-  --base-950: #040f12;
-  --base-900: #07181d;
-  --base-800: #0b2328;
-  --panel-rgb: 11, 27, 31;
-  --panel-strong-rgb: 16, 39, 44;
-  --text-primary: #d9f6f2;
-  --text-muted: #a9e7e0;
-  --text-subtle: #84d8cf;
-  --text-subtle-muted: rgba(132, 216, 207, 0.8);
-  --text-soft: #c7f0ea;
-  --text-soft-strong: #b8e8e1;
-  --toggle-knob: #d2f3ef;
-  --toggle-knob-active: #ecfffc;
+  --accent-rgb: 140, 205, 196;
+  --accent-100: #d4f4ef;
+  --accent-200: #8ccdc4;
+  --accent-300: #6ab7ad;
+  --accent-400: #4a9f96;
+  --glint-rgb: 227, 255, 251;
+  --base-950: #0f1415;
+  --base-900: #161d1f;
+  --base-800: #212b2e;
+  --panel-rgb: 22, 30, 32;
+  --panel-strong-rgb: 28, 38, 40;
+  --text-primary: #e7f5f2;
+  --text-muted: #c2e4df;
+  --text-subtle: #a6d7d1;
+  --text-subtle-muted: rgba(166, 215, 209, 0.82);
+  --text-soft: #d8efeb;
+  --text-soft-strong: #cbe6e1;
+  --toggle-knob: #e1f4f1;
+  --toggle-knob-active: #f5fffd;
 }
 
 /* global styles */
 :root {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
+  font-family: 'Alegreya Sans', 'Gill Sans', 'Trebuchet MS', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -105,48 +97,45 @@ button {
 }
 
 .cyberpunk-root {
-  font-family:
-    'Share Tech Mono', 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo,
-    Monaco, Consolas, 'Liberation Mono', monospace;
+  font-family: 'Fraunces', 'Iowan Old Style', 'Palatino', serif;
 }
 
 .cyberpunk-bg {
   background:
-    radial-gradient(120% 90% at 20% 10%, rgba(var(--accent-rgb), 0.25), transparent 60%),
-    radial-gradient(120% 90% at 85% 20%, rgba(var(--accent-rgb), 0.22), transparent 55%),
-    linear-gradient(135deg, var(--base-950), #0b0a0a 40%, var(--base-900));
+    radial-gradient(120% 90% at 18% 12%, rgba(var(--accent-rgb), 0.2), transparent 60%),
+    radial-gradient(120% 90% at 85% 20%, rgba(var(--glint-rgb), 0.22), transparent 60%),
+    linear-gradient(160deg, var(--base-950), var(--base-900) 55%, var(--base-800));
 }
 
 .cyberpunk-grid {
   background-image:
-    linear-gradient(rgba(var(--accent-rgb), 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--accent-rgb), 0.12) 1px, transparent 1px);
-  background-size: 18px 18px;
-  animation: grid-drift 16s linear infinite;
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: grid-drift 26s linear infinite;
+  opacity: 0.35;
 }
 
 .scanlines {
-  background-image: linear-gradient(
-    180deg,
-    rgba(var(--accent-rgb), 0.08) 0%,
-    rgba(0, 0, 0, 0) 6%,
-    rgba(0, 0, 0, 0) 94%,
-    rgba(var(--accent-rgb), 0.08) 100%
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    rgba(var(--accent-rgb), 0.12) 0%,
+    rgba(0, 0, 0, 0) 55%
   );
-  mix-blend-mode: screen;
-  animation: scanline 4s linear infinite;
+  mix-blend-mode: normal;
+  animation: scanline 10s ease-in-out infinite alternate;
 }
 
 .holo-card {
   background: linear-gradient(
     180deg,
-    rgba(var(--accent-rgb), 0.12),
-    rgba(var(--accent-rgb), 0.02)
+    rgba(var(--panel-rgb), 0.9),
+    rgba(var(--panel-rgb), 0.55)
   );
-  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
   box-shadow:
-    0 0 24px rgba(var(--accent-rgb), 0.25),
-    inset 0 0 20px rgba(var(--accent-rgb), 0.12);
+    0 18px 30px rgba(0, 0, 0, 0.25),
+    inset 0 0 20px rgba(var(--accent-rgb), 0.08);
 }
 
 .holo-corners::before {
@@ -166,31 +155,29 @@ button {
 }
 
 .neon-text {
-  color: var(--accent-100);
-  text-shadow:
-    0 0 12px rgba(var(--accent-rgb), 0.6),
-    0 0 28px rgba(var(--accent-rgb), 0.35);
+  color: var(--text-primary);
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.25);
 }
 
 .neon-primary {
-  background: linear-gradient(135deg, var(--accent-200), var(--accent-300) 60%, var(--accent-400));
+  background: linear-gradient(135deg, var(--accent-200), var(--accent-300) 70%, var(--accent-400));
   box-shadow:
-    0 0 18px rgba(var(--accent-rgb), 0.45),
-    0 10px 24px rgba(17, 8, 8, 0.6);
+    0 10px 20px rgba(0, 0, 0, 0.28),
+    0 0 14px rgba(var(--accent-rgb), 0.25);
 }
 
 .neon-secondary {
   background: linear-gradient(
     135deg,
-    rgba(var(--accent-rgb), 0.12),
-    rgba(var(--accent-rgb), 0.02)
+    rgba(var(--panel-rgb), 0.75),
+    rgba(var(--panel-rgb), 0.35)
   );
-  border: 1px solid rgba(var(--accent-rgb), 0.25);
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
 }
 
 .neon-input {
-  background: rgba(9, 6, 6, 0.9);
-  border: 1px solid rgba(var(--accent-rgb), 0.25);
+  background: rgba(var(--panel-rgb), 0.85);
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
 }
 
 .neon-input[type='number'] {
@@ -205,12 +192,16 @@ button {
 }
 
 .neon-toggle {
-  background: rgba(35, 9, 9, 0.9);
-  box-shadow: inset 0 0 8px rgba(var(--accent-rgb), 0.2);
+  background: rgba(var(--panel-rgb), 0.9);
+  box-shadow: inset 0 0 8px rgba(var(--accent-rgb), 0.18);
 }
 
 .animate-glow {
   animation: glow-pulse 2.6s ease-in-out infinite;
+}
+
+.animate-breathe {
+  animation: breathe 3.6s ease-in-out infinite;
 }
 
 .animate-glitch {
@@ -232,10 +223,25 @@ button {
 
 @keyframes scanline {
   0% {
-    background-position: 0 -100%;
+    opacity: 0.5;
   }
   100% {
-    background-position: 0 200%;
+    opacity: 0.9;
+  }
+}
+
+@keyframes breathe {
+  0% {
+    transform: translateZ(0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateZ(0) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: translateZ(0) scale(1);
+    opacity: 0.9;
   }
 }
 
@@ -277,6 +283,7 @@ button {
   .cyberpunk-grid,
   .scanlines,
   .animate-glow,
+  .animate-breathe,
   .animate-glitch {
     animation: none !important;
   }

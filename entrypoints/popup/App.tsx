@@ -135,8 +135,11 @@ function App() {
       <div className="relative z-10 flex h-full flex-col">
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-[10px] tracking-[0.32em] text-(--text-muted) uppercase">
-            <span className="h-1.5 w-1.5 rounded-full bg-(--accent-200) shadow-[0_0_6px_rgba(var(--accent-rgb),0.8)]" />
-            Tomato
+            <span className="h-1.5 w-1.5 rounded-full bg-(--accent-200) shadow-[0_0_6px_rgba(var(--accent-rgb),0.35)]" />
+            <span>Tomato</span>
+            <span className="text-[9px] tracking-[0.28em] text-(--text-subtle-muted)">
+              Focus + Rest
+            </span>
           </div>
           <button
             type="button"
@@ -163,7 +166,7 @@ function App() {
               <div className="holo-card holo-corners relative rounded-2xl p-4 text-center">
                 <div
                   className={`neon-text text-6xl leading-none font-semibold tracking-[0.08em] tabular-nums ${
-                    isRunning ? 'animate-glow animate-glitch' : ''
+                    isRunning ? 'animate-breathe' : ''
                   }`}
                 >
                   {formatDuration(remainingMs)}
@@ -176,14 +179,14 @@ function App() {
                   onClick={handleStartWorking}
                 >
                   <span className="absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(var(--glint-rgb),0.65),transparent)] opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100" />
-                  <span className="relative z-10">Start working</span>
+                  <span className="relative z-10">Start focus</span>
                 </button>
                 <button
                   className="group neon-secondary relative rounded-xl px-3 py-2 text-sm font-semibold text-(--text-soft-strong) transition hover:-translate-y-0.5 hover:shadow-[0_12px_22px_rgba(var(--accent-rgb),0.2)]"
                   onClick={handleStartBreak}
                 >
                   <span className="absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(var(--accent-rgb),0.35),transparent)] opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100" />
-                  <span className="relative z-10">Take a break</span>
+                  <span className="relative z-10">Begin rest</span>
                 </button>
                 <button
                   className="group neon-secondary relative rounded-xl px-3 py-2 font-semibold text-(--text-soft-strong) transition hover:-translate-y-0.5 hover:shadow-[0_12px_22px_rgba(var(--accent-rgb),0.2)] disabled:cursor-not-allowed disabled:opacity-50"
@@ -209,7 +212,7 @@ function App() {
                     htmlFor="workMinutes"
                     className="text-[10px] tracking-[0.18em] text-(--text-subtle-muted) uppercase"
                   >
-                    Work minutes
+                    Focus minutes
                   </label>
                   <input
                     id="workMinutes"
@@ -226,7 +229,7 @@ function App() {
                     htmlFor="breakMinutes"
                     className="text-[10px] tracking-[0.18em] text-(--text-subtle-muted) uppercase"
                   >
-                    Break minutes
+                    Rest minutes
                   </label>
                   <input
                     id="breakMinutes"
@@ -242,7 +245,7 @@ function App() {
                 <div className="flex items-center justify-between gap-3 text-xs text-(--text-soft)">
                   <div className="flex items-center gap-2">
                     <label htmlFor="spellSound" className="cursor-pointer">
-                      Spell sound
+                      Chime
                     </label>
                     <button
                       type="button"
@@ -275,7 +278,7 @@ function App() {
                 </div>
                 <div className="flex items-center justify-between gap-3 text-xs text-(--text-soft)">
                   <label htmlFor="notificationsToggle" className="cursor-pointer">
-                    Notifications
+                    Reminders
                   </label>
                   <label
                     htmlFor="notificationsToggle"
