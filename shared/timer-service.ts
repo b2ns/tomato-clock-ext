@@ -23,8 +23,12 @@ export type TimerAdapter = {
   now: () => number
 }
 
-export function createTimerService(adapter: TimerAdapter) {
+export function createTimerService(
+  adapter: TimerAdapter,
+  options: { t?: (key: string) => string } = {},
+) {
   let state = createDefaultState()
+  const t = options.t ?? ((key: string) => key)
 
   const persist = async (next: TimerState) => {
     state = next
@@ -42,9 +46,9 @@ export function createTimerService(adapter: TimerAdapter) {
 
   const buildNotification = (mode: TimerState['mode']) => {
     if (mode === 'work') {
-      return { title: 'Focus session complete', message: 'Time to rest.' }
+      return { title: t('notification_focus_title'), message: t('notification_focus_body') }
     }
-    return { title: 'Rest complete', message: 'Return to focus when ready.' }
+    return { title: t('notification_rest_title'), message: t('notification_rest_body') }
   }
 
   const completeIfOverdue = async (now: number) => {

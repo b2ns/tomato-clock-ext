@@ -1,6 +1,12 @@
 import type { TimerState } from './timer'
 
 export type TimerPhase = 'focusing' | 'focus_over' | 'rest' | 'rest_over' | 'paused'
+export type PhaseLabelKey =
+  | 'phase_focusing'
+  | 'phase_focus_over'
+  | 'phase_rest'
+  | 'phase_rest_over'
+  | 'phase_paused'
 
 export function deriveTimerPhase(state: TimerState): TimerPhase {
   if (state.status === 'paused') return 'paused'
@@ -10,16 +16,16 @@ export function deriveTimerPhase(state: TimerState): TimerPhase {
   return state.mode === 'break' ? 'focus_over' : 'rest_over'
 }
 
-const PHASE_LABELS: Record<TimerPhase, string> = {
-  focusing: 'Focusing',
-  focus_over: 'Focus is over',
-  rest: 'Rest',
-  rest_over: 'Rest is over',
-  paused: 'Paused',
+const PHASE_LABEL_KEYS: Record<TimerPhase, PhaseLabelKey> = {
+  focusing: 'phase_focusing',
+  focus_over: 'phase_focus_over',
+  rest: 'phase_rest',
+  rest_over: 'phase_rest_over',
+  paused: 'phase_paused',
 }
 
-export function getPhaseLabel(phase: TimerPhase): string {
-  return PHASE_LABELS[phase]
+export function getPhaseLabelKey(phase: TimerPhase): PhaseLabelKey {
+  return PHASE_LABEL_KEYS[phase]
 }
 
 const BADGE_PRESENTATION: Record<

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { createDefaultState } from '../shared/timer'
-import { deriveTimerPhase, getBadgePresentation, getPhaseLabel } from '../shared/timer-phase'
+import { deriveTimerPhase, getBadgePresentation, getPhaseLabelKey } from '../shared/timer-phase'
 
 test('deriveTimerPhase maps status/mode to phase', () => {
   const base = createDefaultState()
@@ -18,6 +18,6 @@ test('badge presentation uses 3-char text', () => {
   assert.equal(presentation.text, 'RDY')
 })
 
-test('phase label is user-facing', () => {
-  assert.equal(getPhaseLabel('focus_over'), 'Focus is over')
+test('phase label uses translation key', () => {
+  assert.equal(getPhaseLabelKey('focus_over'), 'phase_focus_over')
 })

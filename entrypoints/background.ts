@@ -1,3 +1,4 @@
+import { i18n } from '#i18n'
 import { browser, defineBackground } from '#imports'
 import { ALARM_NAME, NOTIFICATION_ID, createChromeAdapter } from '@/shared/chrome-adapter'
 import type { TimerMessage, TimerResponse } from '@/shared/messages'
@@ -5,7 +6,7 @@ import { createTimerService } from '@/shared/timer-service'
 
 export default defineBackground(() => {
   const adapter = createChromeAdapter()
-  const service = createTimerService(adapter)
+  const service = createTimerService(adapter, { t: i18n.t })
   void service.initialize()
 
   const startWithMode = async (mode: 'work' | 'break') => {

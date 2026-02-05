@@ -42,6 +42,45 @@ test('does not send notification when notifications are disabled', async () => {
   assert.equal(soundCount, 1)
 })
 
+test('uses translator for notification strings', async () => {
+  const baseState = createDefaultState()
+  const now = 1_000
+  let storedState: TimerState = {
+    ...baseState,
+    status: 'running' as const,
+    mode: 'work' as const,
+    durationMs: minutesToMs(baseState.custom.work),
+    endAt: now - 1,
+    soundEnabled: false,
+    notificationsEnabled: true,
+  }
+
+  const t = (key: string) => `t:${key}`
+  let notified: { title: string; message: string } | null = null
+
+  const adapter = {
+    getStoredState: async () => storedState,
+    setStoredState: async (next: TimerState) => {
+      storedState = next
+    },
+    scheduleAlarm: async () => {},
+    notify: async (title: string, message: string) => {
+      notified = { title, message }
+    },
+    playSound: async () => {},
+    setBadge: async () => {},
+    now: () => now,
+  }
+
+  const service = createTimerService(adapter, { t })
+  await service.handleAlarm()
+
+  assert.deepEqual(notified, {
+    title: 't:notification_focus_title',
+    message: 't:notification_focus_body',
+  })
+})
+
 test('updates notification preference via SET_NOTIFICATIONS', async () => {
   const baseState = createDefaultState()
   let storedState: TimerState = {

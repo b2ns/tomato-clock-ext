@@ -1,7 +1,8 @@
+import { i18n } from '#i18n'
 import { browser } from '#imports'
 import type { TimerMessage, TimerResponse } from '@/shared/messages'
 import { clampMinutes, createDefaultState, formatDuration, type TimerState } from '@/shared/timer'
-import { deriveTimerPhase, getPhaseLabel } from '@/shared/timer-phase'
+import { deriveTimerPhase, getPhaseLabelKey } from '@/shared/timer-phase'
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react'
 
 type TimerAction = (message: TimerMessage) => void
@@ -53,6 +54,10 @@ function App() {
     setBreakMinutes(state.custom.break)
   }, [state.custom.work, state.custom.break])
 
+  useEffect(() => {
+    document.title = i18n.t('popup_title')
+  }, [])
+
   const remainingMs = useMemo(() => {
     if (state.status === 'running' && state.endAt) {
       return Math.max(0, state.endAt - now)
@@ -64,9 +69,10 @@ function App() {
   }, [state, now])
 
   const phase = useMemo(() => deriveTimerPhase(state), [state])
-  const phaseLabel = getPhaseLabel(phase)
+  const phaseLabel = i18n.t(getPhaseLabelKey(phase))
 
-  const pauseResumeLabel = state.status === 'paused' ? 'Resume' : 'Pause'
+  const pauseResumeLabel =
+    state.status === 'paused' ? i18n.t('action_resume') : i18n.t('action_pause')
   const isRunning = state.status === 'running'
   const themeClass = state.mode === 'break' ? 'theme-break' : 'theme-work'
 
@@ -140,14 +146,11 @@ function App() {
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-[10px] tracking-[0.32em] text-(--text-muted) uppercase">
             <span className="h-1.5 w-1.5 rounded-full bg-(--accent-200) shadow-[0_0_6px_rgba(var(--accent-rgb),0.35)]" />
-            <span>Tomato</span>
-            <span className="text-[9px] tracking-[0.28em] text-(--text-subtle-muted)">
-              Focus + Rest
-            </span>
+            <span>{i18n.t('ext_name')}</span>
           </div>
           <button
             type="button"
-            aria-label={settingsOpen ? 'Close settings' : 'Open settings'}
+            aria-label={settingsOpen ? i18n.t('aria_close_settings') : i18n.t('aria_open_settings')}
             onClick={() => setSettingsOpen((open) => !open)}
             className="rounded-md border border-[rgba(var(--accent-rgb),0.4)] bg-[rgba(var(--panel-rgb),0.7)] p-2 text-(--text-soft) transition hover:bg-[rgb(var(--panel-strong-rgb))] hover:shadow-[0_0_12px_rgba(var(--accent-rgb),0.35)]"
           >
@@ -186,14 +189,14 @@ function App() {
                   onClick={handleStartWorking}
                 >
                   <span className="absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(var(--glint-rgb),0.65),transparent)] opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100" />
-                  <span className="relative z-10">Start focus</span>
+                  <span className="relative z-10">{i18n.t('action_start_focus')}</span>
                 </button>
                 <button
                   className="group neon-secondary relative rounded-xl px-3 py-2 text-sm font-semibold text-(--text-soft-strong) transition hover:-translate-y-0.5 hover:shadow-[0_12px_22px_rgba(var(--accent-rgb),0.2)]"
                   onClick={handleStartBreak}
                 >
                   <span className="absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(var(--accent-rgb),0.35),transparent)] opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100" />
-                  <span className="relative z-10">Begin rest</span>
+                  <span className="relative z-10">{i18n.t('action_begin_rest')}</span>
                 </button>
                 <button
                   className="group neon-secondary relative rounded-xl px-3 py-2 font-semibold text-(--text-soft-strong) transition hover:-translate-y-0.5 hover:shadow-[0_12px_22px_rgba(var(--accent-rgb),0.2)] disabled:cursor-not-allowed disabled:opacity-50"
@@ -211,7 +214,7 @@ function App() {
               className={`flex w-1/2 flex-col gap-3 ${settingsOpen ? '' : 'pointer-events-none'}`}
             >
               <div className="text-[10px] tracking-[0.32em] text-(--text-subtle) uppercase">
-                Settings
+                {i18n.t('settings_title')}
               </div>
               <div className="flex min-h-0 flex-1 flex-col gap-3 pr-2">
                 <div className="grid gap-1.5">
@@ -219,7 +222,7 @@ function App() {
                     htmlFor="workMinutes"
                     className="text-[10px] tracking-[0.18em] text-(--text-subtle-muted) uppercase"
                   >
-                    Focus minutes
+                    {i18n.t('settings_focus_minutes')}
                   </label>
                   <input
                     id="workMinutes"
@@ -236,7 +239,7 @@ function App() {
                     htmlFor="breakMinutes"
                     className="text-[10px] tracking-[0.18em] text-(--text-subtle-muted) uppercase"
                   >
-                    Rest minutes
+                    {i18n.t('settings_rest_minutes')}
                   </label>
                   <input
                     id="breakMinutes"
@@ -252,11 +255,11 @@ function App() {
                 <div className="flex items-center justify-between gap-3 text-xs text-(--text-soft)">
                   <div className="flex items-center gap-2">
                     <label htmlFor="spellSound" className="cursor-pointer">
-                      Chime
+                      {i18n.t('settings_chime')}
                     </label>
                     <button
                       type="button"
-                      aria-label="Play sound preview"
+                      aria-label={i18n.t('settings_sound_preview')}
                       className="rounded-md border border-[rgba(var(--accent-rgb),0.4)] bg-[rgba(var(--panel-rgb),0.7)] p-1.5 text-(--text-soft) transition hover:bg-[rgb(var(--panel-strong-rgb))] hover:shadow-[0_0_10px_rgba(var(--accent-rgb),0.3)]"
                       onClick={() => sendMessage({ type: 'PLAY_SOUND' })}
                     >
@@ -285,7 +288,7 @@ function App() {
                 </div>
                 <div className="flex items-center justify-between gap-3 text-xs text-(--text-soft)">
                   <label htmlFor="notificationsToggle" className="cursor-pointer">
-                    Reminders
+                    {i18n.t('settings_reminders')}
                   </label>
                   <label
                     htmlFor="notificationsToggle"
@@ -308,7 +311,7 @@ function App() {
                 className="neon-secondary rounded-xl px-3 py-1.5 text-xs font-semibold text-(--text-soft-strong) transition hover:shadow-[0_0_16px_rgba(var(--accent-rgb),0.25)]"
                 onClick={handleSaveSettings}
               >
-                Save settings
+                {i18n.t('settings_save')}
               </button>
             </section>
           </div>

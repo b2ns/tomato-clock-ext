@@ -4,23 +4,24 @@ import { defineConfig } from 'wxt'
 // See https://wxt.dev/api/config.html
 export default defineConfig({
   imports: false,
-  modules: ['@wxt-dev/module-react', '@wxt-dev/auto-icons'],
+  modules: ['@wxt-dev/module-react', '@wxt-dev/auto-icons', '@wxt-dev/i18n/module'],
   manifest: {
-    name: 'Tomato',
-    description: 'a pomodoro clock',
+    name: '__MSG_ext_name__',
+    description: '__MSG_ext_desc__',
+    default_locale: 'en',
     permissions: ['alarms', 'storage', 'notifications', 'offscreen'],
     commands: {
       focus: {
         suggested_key: { default: 'Ctrl+Shift+F', mac: 'Ctrl+Shift+F' },
-        description: 'Start focus session',
+        description: '__MSG_command_focus__',
       },
       rest: {
         suggested_key: { default: 'Ctrl+Shift+R', mac: 'Ctrl+Shift+R' },
-        description: 'Start rest session',
+        description: '__MSG_command_rest__',
       },
       'toggle-pause': {
         suggested_key: { default: 'Ctrl+Shift+P', mac: 'Ctrl+Shift+P' },
-        description: 'Pause or resume timer',
+        description: '__MSG_command_toggle_pause__',
       },
     },
   },
