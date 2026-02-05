@@ -1,46 +1,48 @@
 # Tomato Clock
 
-A calm, restorative Pomodoro timer extension for deep focus and intentional rest.
+A neon, cyberpunk Pomodoro timer extension for focused work and intentional rest.  
+AI‑generated: most of this codebase and copy was produced with AI assistance and then curated by a human.
 
 ## Install
 
-- Chrome Web Store: [Coming soon](https://example.com/chrome-web-store)
-- Firefox Add-ons (AMO): [Coming soon](https://example.com/firefox-amo)
+- Chrome Web Store: Coming soon
+- Firefox Add-ons (AMO): Coming soon
 
 ## Quick Start
 
 1. Click the Tomato Clock icon in your browser toolbar.
-2. Set your **Focus minutes** and **Rest minutes**.
-3. Click **Start focus** to begin a session.
-4. Use **Pause/Resume** or **Stop** as needed.
-5. Toggle **Chime** or **Reminders** in Settings.
+2. Open Settings and set **Focus minutes** and **Rest minutes**.
+3. Click **Start focus** or **Begin rest** to start a session.
+4. Use **Pause/Resume** to control the timer.
+5. Toggle **Chime** or **Reminders** as needed.
 
 ## Features
 
-- Pomodoro-style focus and rest cycles.
-- Customizable focus and rest durations.
-- Sound preview and optional alerts.
-- Desktop notifications (optional).
-- Calm, restorative UI built for quick glances.
+- Focus/rest cycles with a clear phase label and large countdown.
+- Custom durations from 1–180 minutes.
+- Background timer that keeps running after the popup closes.
+- Optional chime with instant preview.
+- Optional desktop notifications on session completion.
+- Badge status indicators for focus, rest, paused, and ready states.
+- Keyboard shortcuts to start focus/rest or toggle pause.
 
 ## Settings
 
-- **Focus minutes / Rest minutes:** Set your desired durations.
-- **Chime:** Toggle audio alerts; preview with the play button.
-- **Reminders:** Toggle system notifications.
-- **Save settings:** Applies your changes.
+- **Focus minutes / Rest minutes**: Set custom durations.
+- **Chime**: Toggle the completion sound and preview it.
+- **Reminders**: Toggle system notifications.
+- **Save settings**: Persists changes to local storage.
 
-## FAQ
+## Keyboard Shortcuts
 
-**Does the timer keep running if I close the popup?**  
-Yes. The timer continues in the background and updates the next time you open the popup.
-
-**How do I change my durations?**  
-Open Settings, adjust the minute inputs, then click **Save settings**.
-
-**How do I turn off sound or notifications?**  
-In Settings, toggle **Chime** or **Reminders** off.
+- **Start focus**: `Ctrl+Shift+F`
+- **Start rest**: `Ctrl+Shift+R`
+- **Pause/Resume**: `Ctrl+Shift+P`
 
 ## Privacy
 
-Tomato Clock stores your timer settings locally in your browser. It does not transmit your data to any external servers.
+Tomato Clock stores timer settings locally in your browser. It does not transmit data to external servers.
+
+## Credits
+
+AI‑generated project with human curation.
